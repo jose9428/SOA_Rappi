@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Tiendas";
+}
+
+<div id="app">
+    <div class="row">
+        <div class="card col-sm-4 border-0" v-for="item in tiendas">
+            <img src="~/img/recursos/tienda.png" alt="Mi Tienda" style="width:100%;" />
+            <div class="card-body  text-center">
+                <h5 class="card-title">{{item.nomTienda}}</h5>
+                <p class="card-text"><i class="fa fa-map-marker"></i> {{item.direccion}}</p>
+                <a v-bind:href="'/Categorias?id='+ item.idTienda" class="btn btn-success">Ver Categorias</a>
+            </div>
+        </div>
+    </div>
+    <div class="loading show" v-if="!loading">
+        <div class="spin"></div>
+    </div>
+</div>
+
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            urlBase: "http://localhost:1468/api",
+            tiendas: [],
+            loading: false,
+        },
+        mounted: function () {
+            this.listarTiendas();
+        },
+        methods: {
+            listarTiendas: function () {
+                this.loading = false;
+                var url = this.urlBase + "/tienda/listar";
+                this.$http.get(url).then(function (response) {
+                    this.tiendas = response.body;
+                    this.loading = true;
+                });
+            }
+        }
+    });
+</script>

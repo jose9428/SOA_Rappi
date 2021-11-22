@@ -1,0 +1,108 @@
+﻿@page
+@model WebVue.Pages.CrearCuentaModel
+@{
+}
+
+<div id="app">
+    <h4>Crear Cuenta</h4>
+    <hr />
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Nombres</label>
+                <input type="text" class="form-control" v-model="cuenta.nombres">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Apellidos</label>
+                <input type="text" class="form-control" v-model="cuenta.apellidos">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Celular</label>
+                <input type="text" class="form-control" v-model="cuenta.numCelular">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Pais</label>
+                <select class="form-control"  v-model="cuenta.idPais"> 
+                    <option v-for="item in paises" v-bind:value="item.idPais">{{item.nomPais}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Correo</label>
+                <input type="text" class="form-control" v-model="cuenta.correo">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Contraseña</label>
+                <input type="password" class="form-control" v-model="cuenta.contrasennia">
+            </div>
+
+        </div>
+
+        <button v-on:click="CrearCuenta" type="button" class="btn btn-primary">Crear</button>
+    </form>
+
+    <div class="loading show" v-if="!loading">
+        <div class="spin"></div>
+    </div>
+</div>
+
+
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            urlBase: "http://localhost:1468/api",
+            cuenta: {},
+            loading: false,
+            paises:[]
+        },
+        mounted: function () {
+            this.listarPais();
+            this.CrearObjeto();
+        },
+        methods: {
+            listarPais: function () {
+                this.loading = false;
+                var url = this.urlBase + "/paises/listar";
+                this.$http.get(url).then(function (response) {
+                    this.paises = response.body;
+                    this.loading = true;
+                });
+            },
+            CrearCuenta: function () {
+                this.loading = false;
+                var url = this.urlBase + "/cuenta/crearCuenta";
+                this.$http.post(url, this.cuenta).then(function (response) {
+                    console.dir(response.body );
+                    if (response.body > 0) {
+                        alertify.alert('Cuenta registrada.');
+                        this.CrearObjeto();
+                    } else {
+                        alertify.alert('No se ha podido registrar cuenta.Por favor verifique que todos los campos sean correctos.');
+                    }
+                    this.loading = true;
+                }, (error) => {
+                    console.dir(error);
+                    alertify.alert("A ocurrido un error interno 500.");
+                    this.loading = true;
+                });
+            },
+            CrearObjeto: function () {
+                this.cuenta = {
+                    nombres: "",
+                    apellidos: "",
+                    numCelular: "",
+                    correo: "",
+                    contrasennia: "",
+                    idPais: 0
+                }
+            }
+        }
+    });
+</script>

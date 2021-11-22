@@ -1,0 +1,55 @@
+﻿@page
+@model WebVue.Pages.CategoriasModel
+@{
+}
+
+
+<div id="app">
+    <h4>Categorias</h4>
+    <a href="/Index">Volver atras</a>
+    <hr />
+    <div class="row">
+        <div class="card col-sm-3 text-center border-0" v-for="item in categorias">
+            <div class="card-body">
+                <h4>{{item.nomCat}}</h4>
+                <a v-bind:href="'/Productos?id='+ item.idCat">
+                    <img v-bind:src="'./img/categorias/' + item.imagen" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-danger" role="alert" v-if="categorias.length == 0">
+        No se encontraron resultados.
+    </div>
+    <div class="loading show" v-if="!loading">
+        <div class="spin"></div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            urlBase: "http://localhost:1468/api",
+            categorias: [],
+            idTienda: 0,
+            loading: false
+        },
+        mounted: function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            this.idTienda = urlParams.get("id");
+
+            this.listarCategorias();
+        },
+        methods: {
+            listarCategorias: function () {
+                this.loading = false;
+                var url = this.urlBase + "/categoria/listar?id=" + this.idTienda;
+                this.$http.get(url).then(function (response) {
+                    this.categorias = response.body;
+                    this.loading = true;
+                });
+            }
+        }
+    });
+</script>

@@ -1,0 +1,52 @@
+﻿@page
+@model WebVue.Pages.ProductosModel
+@{
+}
+
+<div id="app">
+    <h4>Productos</h4>
+    <hr />
+    <div class="row">
+        <div class="card col-sm-3 text-center border-0" v-for="item in productos">
+            <div class="card-body">
+                <img v-bind:src="'./img/productos/' + item.imagen" width="160" height="180" class="img-thumbnail" />
+                <h5>{{item.nomProd}}</h5>
+                <span>S/{{item.precio}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-danger" role="alert" v-if="productos.length == 0">
+        No se encontraron resultados.
+    </div>
+    <div class="loading show" v-if="!loading">
+        <div class="spin"></div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            urlBase: "http://localhost:1468/api",
+            productos: [],
+            idCat: 0,
+            loading: false
+        },
+        mounted: function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            this.idCat = urlParams.get("id");
+
+            this.listarProductos();
+        },
+        methods: {
+            listarProductos: function () {
+                this.loading = false;
+                var url = this.urlBase + "/producto/listar?id=" + this.idCat;
+                this.$http.get(url).then(function (response) {
+                    this.productos = response.body;
+                    this.loading = true;
+                });
+            }
+        }
+    });
+</script>

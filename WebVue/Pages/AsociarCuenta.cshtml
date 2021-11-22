@@ -1,0 +1,94 @@
+﻿@page
+@model WebVue.Pages.AsociarCuentaModel
+@{
+}
+
+<div id="app">
+    <h4>Asociar Cuenta</h4>
+    <hr />
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Correo</label>
+                <input type="text" class="form-control" v-model="cuenta.IdCuentaNavigation.correo">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Numero de Cuenta</label>
+                <input type="text" class="form-control" v-model="cuenta.numeroCuenta">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Cta Interbancaria</label>
+                <input type="text" class="form-control" v-model="cuenta.numeroInterbancario">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Domicilio</label>
+                <input type="text" class="form-control" v-model="cuenta.domicilioFiscal">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Telefono</label>
+                <input type="text" class="form-control" v-model="cuenta.telefono">
+            </div>
+        </div>
+
+        <button v-on:click="CrearCuenta" type="button" class="btn btn-primary">Crear</button>
+    </form>
+
+    <div class="loading show" v-if="!loading">
+        <div class="spin"></div>
+    </div>
+</div>
+
+
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            urlBase: "http://localhost:1468/api",
+            cuenta: {},
+            loading: true,
+            paises:[]
+        },
+        mounted: function () {
+            this.CrearObjeto();
+        },
+        methods: {
+            CrearCuenta: function () {
+                this.loading = false;
+                var url = this.urlBase + "/cuenta/asociarCuenta";
+                this.$http.post(url, this.cuenta).then(function (response) {
+                    console.dir(response.body );
+                    if (response.body == "OK") {
+                        alertify.alert("La cuenta " + this.cuenta.numeroCuenta + " se asoció correctamente.");
+                        this.CrearObjeto();
+                    } else {
+                        alertify.alert(response.body);
+                    }
+                    this.loading = true;
+                }, (error) => {
+                    console.dir(error);
+                    alertify.alert("A ocurrido un error interno 500.");
+                    this.loading = true;
+                });
+            },
+            CrearObjeto: function () {
+                this.cuenta = {
+                    numeroCuenta: "",
+                    numeroInterbancario: "",
+                    domicilioFiscal: "",
+                    telefono: "",
+                    IdCuentaNavigation: {
+                        correo: ""
+                    }
+
+                }
+            }
+        }
+    });
+</script>
