@@ -12,13 +12,13 @@
 3. Install-Package Microsoft.EntityFrameworkCore.Tools -Version 3.0.0
 4. scaffold-DbContext "Data source=(local); Initial Catalog=bd_Rappi; user id=sa; password=castro;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
-Actualizar BD
-Scaffold-DbContext "Data source=(local);Database=bd_Rappi;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
+# Actualizar BD:
+5. Scaffold-DbContext "Data source=(local);Database=bd_Rappi;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
 
 
 # Agregar en Startup.css
 
-5. ConfigureServices
+6. ConfigureServices
 
 public void ConfigureServices(IServiceCollection services)
 {
@@ -31,7 +31,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddControllers();
 }
 
-6. Configure
+7. Configure
 
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
