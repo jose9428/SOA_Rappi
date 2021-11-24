@@ -42,6 +42,7 @@ namespace WebAPI.Soa
                 }
                 else
                 {
+                    obj.IdCuentaNavigation = null; 
                     obj.IdCuenta = objCuenta.IdCuenta;
                     db.AsociarCuenta.Add(obj);
                     res = db.SaveChanges();

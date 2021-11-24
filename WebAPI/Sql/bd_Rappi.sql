@@ -1,3 +1,5 @@
+
+
 use master
 go
 
@@ -76,6 +78,14 @@ create table AsociarCuenta(
 )
 go
 
+alter table AsociarCuenta add idbanco int
+go
+
+alter table AsociarCuenta add foreign key(idBanco) references Banco(idBanco)
+go
+
+update AsociarCuenta set idBanco = 1
+go
  
 INSERT INTO paises VALUES(1, 'AF', 'Afganistán');
 INSERT INTO paises VALUES(2, 'AX', 'Islas Gland');
@@ -335,16 +345,30 @@ insert into Tienda values('Tienda Chorrillos' , 'Av. Alameda Los Cedros 363, Cho
 
 
 insert into Categoria values(1 , 'Restaurantes' , 'restaurants-1617916506.webp')
-insert into Tienda values(1 , 'Supermercado' , 'cpgs-1617916528.webp')
-insert into Tienda values(1 , 'Farmacia' , 'pharmacy-1617916569.webp')
-insert into Tienda values(1 , 'Licores' , 'spirits-1617916616.webp')
-insert into Tienda values(1 , 'Alquilab' , 'alquilab-1597705818.webp')
-insert into Tienda values(1 , 'Rappi Travel' , 'store_type_1624482580671.webp')
+insert into Categoria values(1 , 'Supermercado' , 'cpgs-1617916528.webp')
+insert into Categoria values(1 , 'Farmacia' , 'pharmacy-1617916569.webp')
+insert into Categoria values(1 , 'Licores' , 'spirits-1617916616.webp')
+insert into Categoria values(1 , 'Alquilab' , 'alquilab-1597705818.webp')
+insert into Categoria values(1 , 'Rappi Travel' , 'store_type_1624482580671.webp')
+
+insert into Categoria values(2 , 'Farmacia' , 'pharmacy-1617916569.webp')
+insert into Categoria values(2 , 'Licores' , 'spirits-1617916616.webp')
+insert into Categoria values(2 , 'Alquilab' , 'alquilab-1597705818.webp')
+insert into Categoria values(2 , 'Rappi Travel' , 'store_type_1624482580671.webp')
+
+insert into Categoria values(3 , 'Alquilab' , 'alquilab-1597705818.webp')
+insert into Categoria values(3 , 'Rappi Travel' , 'store_type_1624482580671.webp')
+
 
 insert into Producto values( 1 ,'Brioche 22', 7.99 , '365326-1601493552356.webp')
-
+insert into Producto values( 1 ,'Combo Mambo 10', 19.99 , '796078-1617658553554.webp')
+insert into Producto values( 3 ,'Electrolight Granadilla', 1.56 , '175257-1578009334980.webp')
 
 select * from Categoria
 
 select * from Categoria
 select * from Producto
+select * from Cuenta
+select * from AsociarCuenta
+select * from banco
+

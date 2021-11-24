@@ -11,7 +11,9 @@ namespace WebAPI.Models
         public string NumeroInterbancario { get; set; }
         public string DomicilioFiscal { get; set; }
         public string Telefono { get; set; }
+        public int? Idbanco { get; set; }
 
         public virtual Cuenta IdCuentaNavigation { get; set; }
+        public virtual Banco IdbancoNavigation { get; set; }
     }
 }

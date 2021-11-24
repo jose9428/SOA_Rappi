@@ -27,7 +27,7 @@ namespace WebAPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data source=(local); Initial Catalog=bd_Rappi; user id=sa; password=castro;");
+                optionsBuilder.UseSqlServer("Data source=(local);Database=bd_Rappi;Trusted_Connection=True;");
             }
         }
 
@@ -36,7 +36,7 @@ namespace WebAPI.Models
             modelBuilder.Entity<AsociarCuenta>(entity =>
             {
                 entity.HasKey(e => e.IdAsociarCuenta)
-                    .HasName("PK__AsociarC__EC2C2A57C41551B7");
+                    .HasName("PK__AsociarC__EC2C2A5714C017BD");
 
                 entity.Property(e => e.IdAsociarCuenta).HasColumnName("idAsociarCuenta");
 
@@ -46,6 +46,8 @@ namespace WebAPI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.IdCuenta).HasColumnName("idCuenta");
+
+                entity.Property(e => e.Idbanco).HasColumnName("idbanco");
 
                 entity.Property(e => e.NumeroCuenta)
                     .HasColumnName("numeroCuenta")
@@ -67,12 +69,17 @@ namespace WebAPI.Models
                     .WithMany(p => p.AsociarCuenta)
                     .HasForeignKey(d => d.IdCuenta)
                     .HasConstraintName("FK__AsociarCu__idCue__1ED998B2");
+
+                entity.HasOne(d => d.IdbancoNavigation)
+                    .WithMany(p => p.AsociarCuenta)
+                    .HasForeignKey(d => d.Idbanco)
+                    .HasConstraintName("FK__AsociarCu__idban__1FCDBCEB");
             });
 
             modelBuilder.Entity<Banco>(entity =>
             {
                 entity.HasKey(e => e.Idbanco)
-                    .HasName("PK__Banco__A087EB29F6EAE432");
+                    .HasName("PK__Banco__A087EB2940E8DAF0");
 
                 entity.Property(e => e.Idbanco).HasColumnName("idbanco");
 
@@ -85,7 +92,7 @@ namespace WebAPI.Models
             modelBuilder.Entity<Categoria>(entity =>
             {
                 entity.HasKey(e => e.IdCat)
-                    .HasName("PK__Categori__398E40455813CA8E");
+                    .HasName("PK__Categori__398E4045429C32E2");
 
                 entity.Property(e => e.IdCat).HasColumnName("idCat");
 
@@ -110,7 +117,7 @@ namespace WebAPI.Models
             modelBuilder.Entity<Cuenta>(entity =>
             {
                 entity.HasKey(e => e.IdCuenta)
-                    .HasName("PK__Cuenta__BBC6DF32AE9ECF97");
+                    .HasName("PK__Cuenta__BBC6DF329E83A9A5");
 
                 entity.Property(e => e.IdCuenta).HasColumnName("idCuenta");
 
@@ -151,7 +158,7 @@ namespace WebAPI.Models
             modelBuilder.Entity<Paises>(entity =>
             {
                 entity.HasKey(e => e.IdPais)
-                    .HasName("PK__Paises__BD2285E3BF2EA057");
+                    .HasName("PK__Paises__BD2285E37EBEBA66");
 
                 entity.Property(e => e.IdPais)
                     .HasColumnName("idPais")
@@ -172,7 +179,7 @@ namespace WebAPI.Models
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.HasKey(e => e.IdProd)
-                    .HasName("PK__Producto__B41BB0CAED1696B4");
+                    .HasName("PK__Producto__B41BB0CA54FE8AFF");
 
                 entity.Property(e => e.IdProd).HasColumnName("idProd");
 
@@ -201,7 +208,7 @@ namespace WebAPI.Models
             modelBuilder.Entity<Tienda>(entity =>
             {
                 entity.HasKey(e => e.IdTienda)
-                    .HasName("PK__Tienda__CF09B22C5045EBA3");
+                    .HasName("PK__Tienda__CF09B22CA2FABEEF");
 
                 entity.Property(e => e.IdTienda).HasColumnName("idTienda");
 
