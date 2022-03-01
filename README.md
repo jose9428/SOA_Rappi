@@ -4,6 +4,11 @@
 
 ![Captura de pantalla (515)](https://user-images.githubusercontent.com/76067475/142832616-7aec2645-ffb2-4bc9-80fa-3c3f55e5529a.png)
 
+Agregar Swagger a .Net Core 3
+https://geeks.ms/jorge/2020/06/01/anadir-swagger-a-una-web-api-con-asp-net-core-3-1/
+
+![Captura de pantalla (839)](https://user-images.githubusercontent.com/76067475/156266874-6d37aa10-f25d-4dee-8d10-b2c124a7fe11.png)
+![Captura de pantalla (838)](https://user-images.githubusercontent.com/76067475/156266885-c171b594-fdd5-46f6-8a21-b498a72de5ef.png)
 
 # Instalar
 
