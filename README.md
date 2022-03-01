@@ -12,6 +12,9 @@ https://geeks.ms/jorge/2020/06/01/anadir-swagger-a-una-web-api-con-asp-net-core-
 
 # Instalar
 
+![Captura de pantalla (841)](https://user-images.githubusercontent.com/76067475/156267187-1508a553-1c5f-4239-aa9e-8f4fabc7b290.png)
+
+
 1. Install-Package Microsoft.EntityFrameworkCore -Version 3.0.0
 2. Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 3.0.0
 3. Install-Package Microsoft.EntityFrameworkCore.Tools -Version 3.0.0
