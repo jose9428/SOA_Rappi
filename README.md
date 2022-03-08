@@ -20,6 +20,9 @@ https://geeks.ms/jorge/2020/06/01/anadir-swagger-a-una-web-api-con-asp-net-core-
 3. Install-Package Microsoft.EntityFrameworkCore.Tools -Version 3.0.0
 4. scaffold-DbContext "Data source=(local); Initial Catalog=bd_Rappi; user id=sa; password=castro;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
+Cadena sin contraseña:
+Data source=(local); Initial Catalog=bd_Rappi;Integrated Security=True
+
 # Actualizar BD:
 5. Scaffold-DbContext "Data source=(local);Database=bd_Rappi;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
 
